@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+  api:
+    build: .
+    ports:
+      - 4000:4000
+    environment:
+        PORT: 4000
+        DB_NAME: "voting"
+        MONGODB_URI: 'mongodb://mongo_db:27017'
+        NODEMAILER_EMAIL: "gandalfthegrey9t@gmail.com"
+        NODEMAILER_PASSWORD: "ypjaebrgfolluzds"
+        JWT_SECRET: KB5K214212418NVQ90U9U14359INVEQ90U051J
+        JWT_REFRESH_SECRET: KB5K214212418NVQ90U9U14359INVEQ90U051J
+        CLOUD_NAME: "db4jyr0br"
+        CLOUDINARY_API_KEY: "729474974714684"
+        CLOUDINARY_API_SECRET: "DWEGq9Y3wwTjy6HfbZnqdc0AYxY"
+        ADMIN_PASSWORD: "44qwdqwsf!!@##AAAA"
+    depends_on: 
+      - mongo_db
+volumes:  
+  mongo_db: {}
